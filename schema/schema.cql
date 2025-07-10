@@ -1,15 +1,11 @@
-version: '3'
-services:
-  cassandra:
-    image: cassandra:4.1
-    container_name: csdlnc-cassandra
-    ports:
-      - "9042:9042"
-    environment:
-      - CASSANDRA_CLUSTER_NAME=csdlnc-cluster
-      - CASSANDRA_DC=datacenter1
-    volumes:
-      - cassandra_data:/var/lib/cassandra
+CREATE KEYSPACE IF NOT EXISTS csdlnc_keyspace
+WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
 
-volumes:
-  cassandra_data:
+USE csdlnc_keyspace;
+
+CREATE TABLE IF NOT EXISTS SinhVien (
+  mssv text PRIMARY KEY,
+  hoten text,
+  nganh text,
+  namsinh int
+);
